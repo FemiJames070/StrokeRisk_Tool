@@ -1,4 +1,5 @@
 import streamlit as st
+st.set_page_config(layout="wide")
 
 def system_settings_page():
     """
@@ -275,7 +276,7 @@ def system_settings_page():
     </body>
     </html>
     """
-    st.components.v1.html(full_html_content, height=2500, scrolling=True) # Enabled scrolling to ensure all content is visible
+    st.components.v1.html(full_html_content, height=1350, width=1500, scrolling=True) # Enabled scrolling to ensure all content is visible
 
 # Call the function to render the page.
 system_settings_page()
