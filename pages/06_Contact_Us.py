@@ -1,4 +1,5 @@
 import streamlit as st
+st.set_page_config(layout="wide")
 
 def contact_us_page():
     """
@@ -222,7 +223,7 @@ def contact_us_page():
     """
     # Use st.components.v1.html to embed the full HTML content
     # Set height to a reasonable value and enable scrolling.
-    st.components.v1.html(full_html_content, height=2500, scrolling=False) # Adjusted height and scrolling
+    st.components.v1.html(full_html_content, height=1350, width=1500, scrolling=False) # Adjusted height and scrolling
 
 # Call the function to render the page.
 contact_us_page()
