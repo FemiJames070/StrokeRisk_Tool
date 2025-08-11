@@ -392,9 +392,8 @@ def practitioner_profile_page():
     </body>
     </html>
     """
-    # Set height to a fixed value (increased from 1800 to 2500) and scrolling to False to prevent internal scrollbar.
-    # Increased height and enabled scrolling
-st.components.v1.html(full_html_content, height=1350, width=1500, scrolling=False)
+    # Set height to a reasonable value and enable scrolling.
+    st.components.v1.html(full_html_content, height=1350, width=1500, scrolling=False) # Adjusted height for this page
 
 # Call the function to render the page.
 practitioner_profile_page()
