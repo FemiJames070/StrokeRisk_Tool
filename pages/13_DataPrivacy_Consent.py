@@ -1,4 +1,5 @@
 import streamlit as st
+st.set_page_config(layout="wide")
 
 def data_privacy_and_consent_page():
     """
@@ -260,8 +261,8 @@ def data_privacy_and_consent_page():
 
     # Render the HTML content in Streamlit
     # Set scrolling=False to remove the scrollbar.
-    # Adjusted height to accommodate all content, including the footer.
-    st.components.v1.html(full_html_content, height=1600, scrolling=False)
+    # Set height to a reasonable value and enable scrolling.
+    st.components.v1.html(full_html_content, height=1350, width=1500, scrolling=False) # Adjusted height for this page
 
 # Call the function to render the page when this script is run
 if __name__ == "__main__":
