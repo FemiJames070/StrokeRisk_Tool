@@ -1,4 +1,5 @@
 import streamlit as st
+st.set_page_config(layout="wide")
 
 def patient_records_page():
     """
@@ -247,7 +248,7 @@ def patient_records_page():
     """
     # Use st.components.v1.html to embed the full HTML content
     # Set height to a reasonable value and enable scrolling.
-    st.components.v1.html(full_html_content, height=1200, scrolling=True) # Adjusted height for this page
+    st.components.v1.html(full_html_content, height=1350, width=1500, scrolling=True) # Adjusted height for this page
 
 # Call the function to render the page.
 patient_records_page()
