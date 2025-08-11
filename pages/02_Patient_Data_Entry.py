@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import sys
 import os
+st.set_page_config(layout="wide")
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 try:
     from Final_StrokeRiskApp.Final_StrokeAPP.StrokeRisk_Tool.stroke_predictor_pkl import predict_stroke_risk
