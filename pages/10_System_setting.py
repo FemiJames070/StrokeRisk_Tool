@@ -276,7 +276,8 @@ def system_settings_page():
     </body>
     </html>
     """
-    st.components.v1.html(full_html_content, height=1350, width=1500, scrolling=True) # Enabled scrolling to ensure all content is visible
+   # Set height to a reasonable value and enable scrolling.
+    st.components.v1.html(full_html_content, height=1350, width=1500, scrolling=False) # Adjusted height for this page
 
 # Call the function to render the page.
 system_settings_page()
