@@ -6,6 +6,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import sys
 import os
+st.set_page_config(layout="wide")
 
 # --- Model Loading System ---
 @st.cache_resource
