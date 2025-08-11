@@ -217,7 +217,7 @@ def home_page():
     </html>
     """
     # Use st.components.v1.html to embed the full HTML content
-    st.components.v1.html(full_html_content, height=1350, scrolling=False) # Adjusted height to 1350px
+    st.components.v1.html(full_html_content, height=1500, scrolling=False)
 
 # Call the function to render the home page when this script is run by Streamlit.
 home_page()
