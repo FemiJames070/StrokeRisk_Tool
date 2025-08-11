@@ -5,7 +5,8 @@ import sys
 # --- 1. Global Streamlit Page Configuration ---
 st.set_page_config(
     page_title="StrokeRisk AI System - Login",
-    page_icon="🏥",                  
+    page_icon="🏥",
+    layout="wide",
     initial_sidebar_state="collapsed" # Collapsed by default for login page
 )
 
