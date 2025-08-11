@@ -1,4 +1,5 @@
 import streamlit as st
+st.set_page_config(layout="wide")
 
 def client_profile_page():
     """
@@ -428,7 +429,7 @@ def client_profile_page():
     """
     # Use st.components.v1.html to embed the full HTML content
     # Set height to a reasonable value and enable scrolling.
-    st.components.v1.html(full_html_content, height=2800, scrolling=False) # Increased height slightly for footer
+    st.components.v1.html(full_html_content, height=1350, width=1500, scrolling=False) # Increased height slightly for footer
 
 # Call the function to render the page.
 client_profile_page()
