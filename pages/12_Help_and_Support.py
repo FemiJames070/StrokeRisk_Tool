@@ -147,7 +147,8 @@ def help_and_support_page():
     </body>
     </html>
     """
-    st.components.v1.html(full_html_content, height=1200, scrolling=True)
+    # Set height to a reasonable value and enable scrolling.
+    st.components.v1.html(full_html_content, height=1350, width=1500, scrolling=False) # Adjusted height for this page
 
 # Call the function to render the page.
 help_and_support_page()
