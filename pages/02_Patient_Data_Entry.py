@@ -9,6 +9,9 @@ from numpy import ComplexWarning
 import sklearn
 import xgboost
 
+st.write(f"Scikit-learn version: {sklearn.__version__}")
+st.write(f"XGBoost version: {xgboost.__version__}")
+
 # Page Configuration
 st.set_page_config(layout="wide")
 st.sidebar.title("Navigation Menu")
