@@ -9,13 +9,16 @@ from sklearn.metrics import roc_curve, auc, confusion_matrix
 import os
 
 # Configuration - UPDATED PATH HANDLING
-MODEL_PATH = Path(__file__).parent / "strokerisk_tune_ensemble_model.pkl"
+# UNIVERSAL PATH HANDLER (works both locally and on Streamlit Cloud)
+def get_file_path(filename):
+    """Returns absolute path for a file in your repo's root"""
+    root_dir = Path(__file__).resolve().parent  # Gets root of your GitHub repo
+    return root_dir / filename
 
-# Verify paths immediately
-if not MODEL_PATH.exists():
-    raise FileNotFoundError(f"⛔ Model not found at: {MODEL_PATH}")
-
-print(f"✅ Model path confirmed: {MODEL_PATH}")
+# Example usage:
+MODEL_PATH = get_file_path("strokerisk_tune_ensemble_model.pkl")
+st.write(f"🔍 Model path: {MODEL_PATH}")
+st.write(f"📂 File exists: {MODEL_PATH.exists()}")
     
     # Load model data
     model_data = joblib.load(MODEL_PATH)
