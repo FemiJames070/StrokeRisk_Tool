@@ -11,6 +11,7 @@ from sklearn.metrics import roc_curve, auc, confusion_matrix
 import os
 import streamlit as st
 import pycaret
+from sklearn.utils.metaestimators import available_if  # Newer versions
 
 # Configuration - UPDATED PATH HANDLING
 @st.cache_resource  # Streamlit's persistent cache
