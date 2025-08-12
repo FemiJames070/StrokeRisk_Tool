@@ -1,5 +1,6 @@
 import streamlit as st
 st.set_page_config(layout="wide")
+st.sidebar.title("Navigation Menu")
 
 def data_privacy_and_consent_page():
     """
