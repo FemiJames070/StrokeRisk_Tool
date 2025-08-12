@@ -4,7 +4,8 @@ numpy==1.23.5
 joblib
 matplotlib
 seaborn
-scikit-learn>=1.0.0
 xgboost
 pycaret
 scipy>=1.10.0
+scikit-learn>=1.2.0
+sklearn>=0.0  # This is the dummy package
