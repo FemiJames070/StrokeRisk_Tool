@@ -1,6 +1,6 @@
 streamlit
 pandas
-xgboost
+xgboost==2.0.3
 joblib
 matplotlib
 seaborn
