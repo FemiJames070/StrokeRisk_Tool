@@ -6,18 +6,19 @@ import os
 st.set_page_config(layout="wide")
 st.sidebar.title("Navigation Menu")
 
-try:
-    PROJECT_ROOT = Path(__file__).resolve().parent.parent
-    sys.path.append(str(PROJECT_ROOT))
-    
-    # Debug output
-    st.write(f"Project root: {PROJECT_ROOT}")
-    st.write(f"Files in root: {os.listdir(PROJECT_ROOT)}")
-    
-    from stroke_predictor_pkl import predict_stroke_risk
-    st.success("Import successful!")
-except Exception as e:
-    st.error(f"Import failed: {str(e)}")
+# Go TWO levels up from /pages/ to reach root
+ROOT_DIR = Path(__file__).resolve().parent.parent  
+
+# 1. Add root to Python path
+sys.path.insert(0, str(ROOT_DIR))
+
+# 2. Debug output
+st.write(f"🔍 Root Directory: {ROOT_DIR}")
+st.write(f"📂 Files in Root:", [f.name for f in ROOT_DIR.glob('*')])
+
+# 3. Import (will fail visibly if paths are wrong)
+from stroke_predictor_pkl import MODEL_PATH
+st.success(f"🚀 Model found at: {MODEL_PATH}")
 
 def patient_data_entry():
     st.set_page_config(page_title="Patient Data Entry", layout="wide")
