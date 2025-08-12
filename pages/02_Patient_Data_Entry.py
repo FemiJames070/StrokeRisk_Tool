@@ -3,7 +3,7 @@ import streamlit as st
 import pandas as pd
 import sys
 import os
-from numpy.exceptions import ComplexWarning
+from numpy.core.numeric import ComplexWarning
 st.set_page_config(layout="wide")
 st.sidebar.title("Navigation Menu")
 
