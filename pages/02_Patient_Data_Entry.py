@@ -6,6 +6,7 @@ import os
 import numpy as np
 import pandas as pd
 from numpy.exceptions import ComplexWarning 
+from numpy.core.numeric import ComplexWarning
 st.set_page_config(layout="wide")
 st.sidebar.title("Navigation Menu")
 
