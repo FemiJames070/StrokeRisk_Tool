@@ -6,51 +6,30 @@ import os
 st.set_page_config(layout="wide")
 st.sidebar.title("Navigation Menu")
 
-# UNIVERSAL PATH SOLUTION (GitHub + Streamlit Cloud + Local)
-def get_root_dir():
-    """Returns the root directory regardless of execution context"""
-    # Method 1: Standard local/cloud path resolution
-    root_dir = Path(__file__).resolve().parent.parent
-    
-    # Method 2: GitHub Actions/Streamlit Cloud fallback
-    if "GITHUB_WORKSPACE" in os.environ:
-        root_dir = Path(os.environ["GITHUB_WORKSPACE"])
-    
-    # Debug output
-    st.write(f"🔍 Root directory: {root_dir}")
-    st.write(f"📂 Contents:", [f.name for f in root_dir.glob('*')])
-    
-    return root_dir
-
 # Configure paths
-ROOT_DIR = get_root_dir()
+ROOT_DIR = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT_DIR))
 
-# Verify critical files exist
-REQUIRED_FILES = [
-    "stroke_predictor_pkl.py",
-    "strokerisk_tune_ensemble_model.pkl"
-]
+# Debug output
+st.write("🔍 Verification:")
+st.write(f"Root: {ROOT_DIR}")
+st.write(f"Model exists: {(ROOT_DIR/'strokerisk_tune_ensemble_model.pkl').exists()}")
 
-for file in REQUIRED_FILES:
-    if not (ROOT_DIR / file).exists():
-        st.error(f"⛔ Missing file: {ROOT_DIR/file}")
-    else:
-        st.success(f"✅ Found: {file}")
-
-# Now import with confidence
 try:
     from stroke_predictor_pkl import predict_stroke_risk
-    st.success("🚀 Module imported successfully!")
+    st.success("✅ Module loaded!")
     
     # Test prediction
-    sample_data = [[50, 1, 0, 120, 80, 25, 0, 1]]  # Your input format
-    prediction = predict_stroke_risk(sample_data)
-    st.success(f"Prediction: {prediction}")
-    
+    sample_input = [[50, 1, 0, 120, 80, 25, 0, 1]]  # Adjust to your model's format
+    try:
+        result = predict_stroke_risk(sample_input)
+        st.success(f"Prediction: {result}")
+    except Exception as e:
+        st.error(f"Prediction failed: {e}")
+        
 except Exception as e:
-    st.error(f"❌ Failed: {str(e)}")
-    st.code(f"Current Python path: {sys.path}")
+    st.error(f"Import failed: {str(e)}")
+    st.code(f"Python path: {sys.path}")
 
 def patient_data_entry():
     st.set_page_config(page_title="Patient Data Entry", layout="wide")
