@@ -7,4 +7,3 @@ xgboost
 scipy>=1.10.0
 numpy==1.24.4
 scikit-learn==1.3.2
-pycaret==3.0.0  # Specific version that works with sklearn 1.3.2
