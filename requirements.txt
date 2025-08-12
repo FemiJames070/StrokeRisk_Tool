@@ -4,7 +4,7 @@ numpy==1.23.5
 joblib
 matplotlib
 seaborn
-scikit-learn==1.3.0
+scikit-learn>=1.0.0
 xgboost
 pycaret
 scipy>=1.10.0
