@@ -7,7 +7,6 @@ import numpy as np
 import pandas as pd
 from numpy import ComplexWarning
 import sklearn
-from custom_sklearn import OneToOneFeatureMixin
 
 # Page Configuration
 st.set_page_config(layout="wide")
