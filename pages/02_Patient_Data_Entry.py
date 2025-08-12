@@ -6,6 +6,7 @@ import os
 import numpy as np
 import pandas as pd
 from numpy import ComplexWarning
+from sklearn.utils.metaestimators import available_if  # Newer versions
 
 st.set_page_config(layout="wide")
 st.sidebar.title("Navigation Menu")
