@@ -8,6 +8,7 @@ from sklearn.metrics import (roc_auc_score, f1_score, precision_score,
                             recall_score, accuracy_score, confusion_matrix, 
                             classification_report, RocCurveDisplay)
 st.set_page_config(layout="wide")
+st.sidebar.title("Navigation Menu")
 
 # --- Model Loading System ---
 @st.cache_resource
