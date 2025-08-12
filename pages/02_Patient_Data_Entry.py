@@ -6,10 +6,8 @@ import os
 import numpy as np
 import pandas as pd
 from numpy import ComplexWarning
-from sklearn.utils.metaestimators import available_if
-
-def _safe_tags(estimator):
-    return getattr(estimator, '_get_tags', lambda: {})()
+import sklearn
+import xgboost
 
 # Page Configuration
 st.set_page_config(layout="wide")
