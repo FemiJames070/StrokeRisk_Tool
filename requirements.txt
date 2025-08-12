@@ -1,6 +1,6 @@
 streamlit
 pandas
-numpy
+numpy>=1.22.0
 joblib
 matplotlib
 seaborn
