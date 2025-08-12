@@ -1,5 +1,6 @@
 import streamlit as st
 st.set_page_config(layout="wide")
+st.sidebar.title("Navigation Menu")
 # Each page will manage its own full HTML content including header and footer.
 
 def home_page():
