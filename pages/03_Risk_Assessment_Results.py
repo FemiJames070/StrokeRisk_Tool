@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import sys
 import os
 st.set_page_config(layout="wide")
+st.sidebar.title("Navigation Menu")
 
 # --- Model Loading System ---
 @st.cache_resource
