@@ -6,12 +6,18 @@ import os
 st.set_page_config(layout="wide")
 st.sidebar.title("Navigation Menu")
 
-# Get the absolute path to the project root (adjust if needed)
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-sys.path.append(str(PROJECT_ROOT))
-
-# Now import directly
-from stroke_predictor_pkl import predict_stroke_risk
+try:
+    PROJECT_ROOT = Path(__file__).resolve().parent.parent
+    sys.path.append(str(PROJECT_ROOT))
+    
+    # Debug output
+    st.write(f"Project root: {PROJECT_ROOT}")
+    st.write(f"Files in root: {os.listdir(PROJECT_ROOT)}")
+    
+    from stroke_predictor_pkl import predict_stroke_risk
+    st.success("Import successful!")
+except Exception as e:
+    st.error(f"Import failed: {str(e)}")
 
 def patient_data_entry():
     st.set_page_config(page_title="Patient Data Entry", layout="wide")
