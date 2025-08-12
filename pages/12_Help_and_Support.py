@@ -1,5 +1,6 @@
 import streamlit as st
 st.set_page_config(layout="wide")
+st.sidebar.title("Navigation Menu")
 
 def help_and_support_page():
     """
