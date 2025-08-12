@@ -10,24 +10,16 @@ import os
 
 # Configuration - UPDATED PATH HANDLING
 # UNIVERSAL PATH HANDLER (works both locally and on Streamlit Cloud)
-def get_file_path(filename):
-    """Returns absolute path for a file in your repo's root"""
-    root_dir = Path(__file__).resolve().parent  # Gets root of your GitHub repo
-    return root_dir / filename
-
-# Example usage:
-MODEL_PATH = get_file_path("strokerisk_tune_ensemble_model.pkl")
-st.write(f"🔍 Model path: {MODEL_PATH}")
-st.write(f"📂 File exists: {MODEL_PATH.exists()}")
+MODEL_PATH = Path(__file__).parent / "strokerisk_tune_ensemble_model.pkl"
     
-    # Load model data
-    model_data = joblib.load(MODEL_PATH)
+# Load model data
+model_data = joblib.load(MODEL_PATH)
     
-    # Handle different model saving formats
-    if isinstance(model_data, dict):
-        # Case 1: Model saved as dictionary with keys
-        model = model_data.get("model")
-        feature_columns = model_data.get("feature_columns", [])
+# Handle different model saving formats
+if isinstance(model_data, dict):
+    # Case 1: Model saved as dictionary with keys
+    model = model_data.get("model")
+    feature_columns = model_data.get("feature_columns", [])
         
         # Fallback if 'model' key doesn't exist
         if model is None:
