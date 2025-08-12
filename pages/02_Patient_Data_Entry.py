@@ -5,13 +5,7 @@ import os
 st.set_page_config(layout="wide")
 st.sidebar.title("Navigation Menu")
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-try:
-    from Final_StrokeRiskApp.Final_StrokeAPP.StrokeRisk_Tool.stroke_predictor_pkl import predict_stroke_risk
-except ModuleNotFoundError:
-    st.error("Could not import 'stroke_predictor_pkl'. Please ensure the file exists in the parent directory and is named correctly.")
-    def predict_stroke_risk(*args, **kwargs):
-        raise ImportError("stroke_predictor_pkl module not found.")
+from ..stroke_predictor_pkl import predict_stroke_risk
 
 def patient_data_entry():
     st.set_page_config(page_title="Patient Data Entry", layout="wide")
