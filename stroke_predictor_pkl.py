@@ -9,15 +9,13 @@ from sklearn.metrics import roc_curve, auc, confusion_matrix
 import os
 
 # Configuration - UPDATED PATH HANDLING
-current_dir = Path(__file__).parent
-MODEL_PATH = current_dir / "strokerisk_tune_ensemble_model.pkl"
-DATA_SAMPLE_PATH = current_dir / "data" / "sample_data.csv"
+MODEL_PATH = Path(__file__).parent / "strokerisk_tune_ensemble_model.pkl"
 
-# Robust model loading with error handling
-try:
-    # Verify model file exists
-    if not MODEL_PATH.exists():
-        raise FileNotFoundError(f"Model file not found at {MODEL_PATH}")
+# Verify paths immediately
+if not MODEL_PATH.exists():
+    raise FileNotFoundError(f"⛔ Model not found at: {MODEL_PATH}")
+
+print(f"✅ Model path confirmed: {MODEL_PATH}")
     
     # Load model data
     model_data = joblib.load(MODEL_PATH)
