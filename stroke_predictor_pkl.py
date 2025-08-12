@@ -11,16 +11,11 @@ import os
 import pycaret
 
 # Configuration - UPDATED PATH HANDLING
-try:
-    MODEL_PATH = Path(__file__).parent / "strokerisk_tune_ensemble_model.pkl"
-    model = joblib.load(MODEL_PATH)  # Direct loading without PyCaret
-    
-    # Verify model has predict() method
-    if not hasattr(model, 'predict'):
-        raise ValueError("Invalid model format")
-        
-except Exception as e:
-    raise RuntimeError(f"Model loading failed: {str(e)}")
+@st.cache_resource  # Streamlit's persistent cache
+def load_model():
+    return joblib.load("strokerisk_tune_ensemble_model.pkl")
+
+model = load_model()  # Loads once and stays cached
 
 
 # Training data stats
