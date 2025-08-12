@@ -5,7 +5,12 @@ import os
 st.set_page_config(layout="wide")
 st.sidebar.title("Navigation Menu")
 
-from ..stroke_predictor_pkl import predict_stroke_risk
+# Get the absolute path to the project root (adjust if needed)
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+sys.path.append(str(PROJECT_ROOT))
+
+# Now import directly
+from stroke_predictor_pkl import predict_stroke_risk
 
 def patient_data_entry():
     st.set_page_config(page_title="Patient Data Entry", layout="wide")
