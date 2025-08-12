@@ -21,8 +21,8 @@ if isinstance(model_data, dict):
     model = model_data.get("model")
     feature_columns = model_data.get("feature_columns", [])
         
-        # Fallback if 'model' key doesn't exist
-        if model is None:
+    # Fallback if 'model' key doesn't exist
+    if model is None:
             for value in model_data.values():
                 if hasattr(value, 'predict'):
                     model = value
