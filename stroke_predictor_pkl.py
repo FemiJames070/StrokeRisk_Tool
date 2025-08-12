@@ -9,48 +9,49 @@ from sklearn.metrics import roc_curve, auc, confusion_matrix
 import os
 
 # Configuration - UPDATED PATH HANDLING
-# UNIVERSAL PATH HANDLER (works both locally and on Streamlit Cloud)
-MODEL_PATH = Path(__file__).parent / "strokerisk_tune_ensemble_model.pkl"
+try:  
+    # UNIVERSAL PATH HANDLER (works both locally and on Streamlit Cloud)
+    MODEL_PATH = Path(__file__).parent / "strokerisk_tune_ensemble_model.pkl"
     
-# Load model data
-model_data = joblib.load(MODEL_PATH)
+    # Load model data
+    model_data = joblib.load(MODEL_PATH)
     
-# Handle different model saving formats
-if isinstance(model_data, dict):
-    # Case 1: Model saved as dictionary with keys
-    model = model_data.get("model")
-    feature_columns = model_data.get("feature_columns", [])
+    # Handle different model saving formats
+    if isinstance(model_data, dict):
+        # Case 1: Model saved as dictionary with keys
+        model = model_data.get("model")
+        feature_columns = model_data.get("feature_columns", [])
+            
+        # Fallback if 'model' key doesn't exist
+        if model is None:
+                for value in model_data.values():
+                    if hasattr(value, 'predict'):
+                        model = value
+                        break
+        else:
+            # Case 2: Model saved directly
+            model = model_data
+            feature_columns = []
         
-    # Fallback if 'model' key doesn't exist
-    if model is None:
-            for value in model_data.values():
-                if hasattr(value, 'predict'):
-                    model = value
-                    break
-    else:
-        # Case 2: Model saved directly
-        model = model_data
-        feature_columns = []
-    
-    # Validate loaded model
-    if not hasattr(model, 'predict'):
-        raise ValueError("Loaded object is not a valid scikit-learn model")
-    
-    # Define feature columns if not loaded
-    if not feature_columns:
-        feature_columns = [
-            'age', 'hypertension', 'heart_disease', 'avg_glucose_level', 'bmi',
-            'gender_Female', 'gender_Male', 'gender_Other',
-            'ever_married_No', 'ever_married_Yes',
-            'work_type_Govt_job', 'work_type_Never_worked',
-            'work_type_Private', 'work_type_Self-employed', 'work_type_children',
-            'Residence_type_Rural', 'Residence_type_Urban',
-            'smoking_status_Unknown', 'smoking_status_formerly smoked',
-            'smoking_status_never smoked', 'smoking_status_smokes'
-        ]
+        # Validate loaded model
+        if not hasattr(model, 'predict'):
+            raise ValueError("Loaded object is not a valid scikit-learn model")
+        
+        # Define feature columns if not loaded
+        if not feature_columns:
+            feature_columns = [
+                'age', 'hypertension', 'heart_disease', 'avg_glucose_level', 'bmi',
+                'gender_Female', 'gender_Male', 'gender_Other',
+                'ever_married_No', 'ever_married_Yes',
+                'work_type_Govt_job', 'work_type_Never_worked',
+                'work_type_Private', 'work_type_Self-employed', 'work_type_children',
+                'Residence_type_Rural', 'Residence_type_Urban',
+                'smoking_status_Unknown', 'smoking_status_formerly smoked',
+                'smoking_status_never smoked', 'smoking_status_smokes'
+            ]
 
-except Exception as e:
-    raise RuntimeError(f"Failed to load model: {str(e)}")
+    except Exception as e:
+        raise RuntimeError(f"Failed to load model: {str(e)}")
 
 # Training data stats
 age_mean, age_std = 43.23, 22.61
