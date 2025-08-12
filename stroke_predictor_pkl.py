@@ -12,8 +12,21 @@ import os
 import streamlit as st
 import pycaret
 from sklearn.utils.metaestimators import available_if  # Newer versions
-from sklearn.utils._tags import _safe_tags
-
+# Universal _safe_tags solution
+try:
+    # First try the modern location (sklearn >= 1.2)
+    from sklearn.utils._tags import _safe_tags
+except ImportError:
+    try:
+        # Then try the middle version (sklearn 1.0-1.1)
+        from sklearn.utils._estimator_html_repr import _safe_tags
+    except ImportError:
+        # Final fallback for very old versions or future changes
+        def _safe_tags(estimator):
+            """Compatibility layer for missing _safe_tags"""
+            if hasattr(estimator, '_get_tags'):
+                return estimator._get_tags()
+            return {}
 # Configuration - UPDATED PATH HANDLING
 @st.cache_resource  # Streamlit's persistent cache
 def load_model():
