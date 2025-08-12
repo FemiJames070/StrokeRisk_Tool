@@ -1,4 +1,3 @@
---force-reinstall
 --no-cache-dir
 streamlit
 pandas>=2.0.0
