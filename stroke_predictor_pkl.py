@@ -12,11 +12,7 @@ import os
 import streamlit as st
 import pycaret
 from sklearn.utils.metaestimators import available_if  # Newer versions
-try:
-    from sklearn.utils._tags import _safe_tags
-except ImportError:
-    # Fallback for older versions
-    from sklearn.utils._estimator_html_repr import _safe_tags
+from sklearn.utils._tags import _safe_tags
 
 # Configuration - UPDATED PATH HANDLING
 @st.cache_resource  # Streamlit's persistent cache
