@@ -19,6 +19,10 @@ sys.path.insert(0, str(ROOT_DIR))
 try:
     from stroke_predictor_pkl import predict_stroke_risk
     st.success("✅ Module loaded!")
+        
+except Exception as e:
+    st.error(f"Import failed: {str(e)}")
+    st.code(f"Python path: {sys.path}")
 
 def patient_data_entry():
     st.set_page_config(page_title="Patient Data Entry", layout="wide")
