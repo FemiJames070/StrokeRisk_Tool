@@ -1,8 +1,7 @@
 import pycaret
 import pandas as pd
 import numpy as np
-from numpy.exceptions import ComplexWarning 
-from numpy.core.numeric import ComplexWarning 
+from numpy import ComplexWarning
 import joblib
 from pathlib import Path
 import matplotlib.pyplot as plt
