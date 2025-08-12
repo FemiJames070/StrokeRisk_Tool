@@ -6,23 +6,10 @@ import os
 import numpy as np
 import pandas as pd
 from numpy import ComplexWarning
-# Universal compatibility imports for scikit-learn
-try:
-    # For newer sklearn versions (1.0+)
-    from sklearn.utils.metaestimators import available_if as if_delegate_has_method
-except ImportError:
-    # For older versions
-    from sklearn.utils.metaestimators import if_delegate_has_method
+from sklearn.utils.metaestimators import available_if
 
-try:
-    from sklearn.utils._tags import _safe_tags
-except ImportError:
-    try:
-        from sklearn.utils._estimator_html_repr import _safe_tags
-    except ImportError:
-        def _safe_tags(estimator):
-            """Compatibility implementation"""
-            return getattr(estimator, '_get_tags', lambda: {})()
+def _safe_tags(estimator):
+    return getattr(estimator, '_get_tags', lambda: {})()
 
 # Page Configuration
 st.set_page_config(layout="wide")
