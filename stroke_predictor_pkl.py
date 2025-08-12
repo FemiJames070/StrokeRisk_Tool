@@ -10,10 +10,8 @@ import seaborn as sns
 from sklearn.metrics import roc_curve, auc, confusion_matrix
 import os
 import streamlit as st
-from sklearn.utils.metaestimators import available_if
-
-def _safe_tags(estimator):
-    return getattr(estimator, '_get_tags', lambda: {})()
+import sklearn
+import xgboost
     
 # Configuration - UPDATED PATH HANDLING
 @st.cache_resource  # Streamlit's persistent cache
