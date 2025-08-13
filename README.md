@@ -162,7 +162,7 @@ The StrokeRisk application delivers **real-time, explainable stroke risk predict
 
 ## 📂 Additional Documentation
 
-- **Phase 1:** `Project Planning (Business Understanding and data selection).pdf`
+- **Phase 1:** [Business Understanding](https://drive.google.com/file/d/1P7XoourdFPqp3Lw_USbUy06eCNZDEXAN/view?usp=drive_link))
 - **Phase 2:** `StrokeRisk_Data Understanding & Preparation.ipynb`
 - **Phase 3 & 4:** `StrokeRisk Model Building & Evaluation.ipynb`
 
