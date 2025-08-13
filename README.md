@@ -162,8 +162,8 @@ The StrokeRisk application delivers **real-time, explainable stroke risk predict
 
 ## 📂 Additional Documentation
 
-- **Phase 1:** [Business Understanding](https://drive.google.com/file/d/1P7XoourdFPqp3Lw_USbUy06eCNZDEXAN/view?usp=drive_link))
-- **Phase 2:** [Data Understanding & Preparation](https://drive.google.com/file/d/1MtRAzNDO4Ty9QOEIlTLsTaXKlE60Vj0g/view?usp=drive_link))
-- **Phase 3 & 4:** [Model Creation & Evaluation](https://drive.google.com/file/d/1fckHXpVdK5yX1S1W8FHYW6YgbyuJoWw7/view?usp=drive_link))
+- **Phase 1:** [Business Understanding](https://drive.google.com/file/d/1P7XoourdFPqp3Lw_USbUy06eCNZDEXAN/view?usp=drive_link)
+- **Phase 2:** [Data Understanding & Preparation](https://drive.google.com/file/d/1MtRAzNDO4Ty9QOEIlTLsTaXKlE60Vj0g/view?usp=drive_link)
+- **Phase 3 & 4:** [Model Creation & Evaluation](https://drive.google.com/file/d/1fckHXpVdK5yX1S1W8FHYW6YgbyuJoWw7/view?usp=drive_link)
 
 ---
