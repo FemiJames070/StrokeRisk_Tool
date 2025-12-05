@@ -4,7 +4,7 @@
 **Course:** Web Development and Cloud Computing – ARTI404  
 **Group 4 (G4 Pulse):** Fuad, Preston, Marrium, and Femi James  
 
-**Live App:** [StrokeRisk Tool](https://strokerisktool.streamlit.app/)  
+**Live App:** [StrokeRisk Tool](https://strokerisktool.streamlit.app/Patient_Data_Entry)  
 **GitHub Repository:** [StrokeRisk_Tool](https://github.com/FemiJames070/StrokeRisk_Tool.git)
 
 ---
