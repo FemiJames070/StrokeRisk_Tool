@@ -1,8 +1,12 @@
-# StrokeRisk Tool
+# StrokeRisk AI System
 
-**Project Phase 5: Cloud Deployment**  
+**Project Phase:** 5 (Full Lifecycle: Development $\rightarrow$ MLOps $\rightarrow$ Deployment)  
 **Course:** Web Development and Cloud Computing – ARTI404  
-**Group 4 (G4 Pulse):** Fuad, Preston, Marrium, and Femi James  
+**Lead Architect:** Oluwafemi (Femi) James
+
+**Contributing Teams:**
+* **Phase 1 (Development):** Group 4 (G4 Pulse) – *Fuad, Preston, Marrium, Femi*
+* **Phase 2 (Maintenance & MLOps):** Group 2 – *Kevin, Shalin, Femi*
 
 **Live App:** [StrokeRisk Tool](https://strokerisktool.streamlit.app/Patient_Data_Entry)  
 **GitHub Repository:** [StrokeRisk_Tool](https://github.com/FemiJames070/StrokeRisk_Tool.git)
@@ -11,159 +15,112 @@
 
 ## 📌 Introduction
 
-Stroke is one of the leading causes of death and long-term disability worldwide. Early detection of high-risk individuals can improve outcomes, reduce healthcare costs, and save lives.  
+Stroke is one of the leading causes of death and long-term disability worldwide. Early detection of high-risk individuals can improve outcomes, reduce healthcare costs, and save lives.
 
-The **StrokeRisk Application** uses **machine learning** to predict stroke risk from demographic, lifestyle, and medical data. Built with the **CRISP-DM** methodology and grounded in **responsible AI principles**, the application features:
+The **StrokeRisk Application** is not just a predictive tool; it is a **governed AI system**. It uses machine learning to predict stroke risk from demographic and medical data, built on the **CRISP-DM** methodology. Uniquely, it integrates a "Governance-as-Code" layer using **MLflow** to ensure that every prediction is traceable, reproducible, and compliant with healthcare standards (FDA SaMD/PIPEDA).
 
-- **Accurate Predictions** – Ensemble of top-performing ML models.
-- **What-if Analysis** – Explore preventive scenarios.
-- **Interpretability** – SHAP-based feature explanations.
-- **Ethical & Human-Centered Design** – Fairness monitoring, transparency, and usability focus.
+### Key Capabilities:
+- **Accurate Predictions** – Soft-Voting Ensemble of top-performing ML models.
+- **Governance-as-Code** – Immutable audit trails and reproducibility locks.
+- **Interpretability** – SHAP-based feature explanations for clinician trust.
+- **Ethical Design** – Fairness monitoring and Human-Centered UI.
 
 ---
 
 ## 1️⃣ Business Understanding
 
-**Problem Statement:**  
-Develop a scalable, data-driven clinical decision support tool to help healthcare professionals identify high-risk patients before stroke onset.
+**Problem Statement:** Healthcare providers lack an efficient, proactive, and *auditable* way to identify individuals at high risk of stroke.
 
-**Scope:**  
-Predict stroke risk using patient demographic and medical data.
-
-**Value Proposition:**  
-Identify 80% of high-risk patients earlier than current methods, potentially reducing stroke-related readmissions by 15%.
+**Value Proposition:** Identify 80% of high-risk patients earlier than current methods, reducing stroke-related readmissions by 15%, while maintaining strict regulatory compliance through MLOps.
 
 **Stakeholders:**
-| Stakeholder           | Role                 | Interest                                |
-|-----------------------|----------------------|------------------------------------------|
-| Healthcare Providers  | Frontline users      | Early detection, patient prioritization |
-| Hospital Admins       | Oversight            | Reduce readmissions, cut costs          |
-| Data Science Team     | Model builders       | Maintain accuracy and reliability       |
-| IT Team               | Deployment           | Secure, scalable integration            |
-| Patients              | End beneficiaries    | Preventative care access                |
-| Public Health Agencies| Population health    | Scale prevention programs               |
-| Insurance Providers   | Risk managers        | Lower claims via early intervention     |
-
-**Business Goals:**
-- Detect ≥80% of high-risk patients early.
-- Reduce stroke-related readmissions by 15%.
-- Improve care efficiency with patient prioritization.
-- Enable data-driven prevention strategies.
-- Build a scalable AI framework for broader health risk prediction.
+| Stakeholder | Role | Interest |
+| :--- | :--- | :--- |
+| **Healthcare Providers** | Frontline users | Early detection, patient prioritization |
+| **Data Science Team** | Model Governance | Accuracy, bias auditing, and version control |
+| **Patients** | End beneficiaries | Preventative care access & data privacy |
+| **Auditors/Regulators** | Compliance | Traceability of model decisions (PIPEDA/FDA) |
 
 ---
 
-## 2️⃣ Data Understanding
+## 2️⃣ Data Understanding & Preparation
 
-**Source:** Public stroke dataset (`stroke.csv`) with demographic, lifestyle, and medical history.
+**Source:** Public stroke dataset (`stroke.csv`) with 5,110 patient records.  
+**Target Variable:** `stroke` (Binary Classification).
 
-**Key Features:** Age, hypertension, heart disease, BMI, smoking status, glucose levels, work type, marital status, residence type.  
-**Target Variable:** `stroke` (binary: 1 = Yes, 0 = No).  
-
-**Challenges:**
-- Class imbalance (~5% stroke cases).
-- Missing BMI values.
-- No temporal/geographic data.
-
-**Findings:**
-- Strong correlation: Age, hypertension, glucose levels.
-- Moderate: Smoking status, marital status.
-- Weak but relevant: Work type, residence type.
+**Key Challenges & Solutions:**
+* **Class Imbalance:** Only ~5% stroke cases. Solved using **SMOTE** (Synthetic Minority Over-sampling Technique) to achieve a 50:50 training split.
+* **Missing Data:** Median imputation grouped by `Age` and `Gender` for BMI.
+* **Data Integrity:** Implemented `log_input(dataset)` in MLflow to create a digest of the training data for every run.
 
 ---
 
-## 3️⃣ Data Preparation
+## 3️⃣ Phase 1: Modeling & The Ensemble Innovation
 
-- **Missing Values:** Median imputation by age group for BMI.
-- **Encoding:** One-hot encoding (`drop_first=True`).
-- **Scaling:** `StandardScaler` after SMOTE.
-- **Class Imbalance:** SMOTE to 50:50 ratio.
-- **Split:** 80/20 train-test with stratification.
-- **Ethics:** Retained ambiguous entries, logged preprocessing steps.
+To solve the "Accuracy Paradox" (where a model predicts "No Stroke" 95% of the time and claims high accuracy), we moved beyond single models.
 
----
+**Models Evaluated:**
+* Random Forest (Baseline)
+* XGBoost (High Variance)
+* Extra Trees (Low Bias)
 
-## 4️⃣ Modeling & Evaluation
-
-**Models Tested:**
-- Random Forest (Best overall accuracy ~0.96)
-- XGBoost (Strong accuracy, unique feature insights)
-- Extra Trees (Lowest false positives, balanced F1)
-- LightGBM (Competitive but less stable)
-- Decision Tree (Baseline, overfit)
-
-**Evaluation Metrics:** Accuracy, Recall, Precision, F1-score, AUC-ROC, Confusion Matrix, Feature Importance.
-
-**Deployment Choice:**  
-Three-model ensemble (**Random Forest + XGBoost + Extra Trees**) plus a combined meta-model.  
-Hyperparameter tuning showed no significant improvement.
+**The Innovation:**
+We developed a **Soft-Voting Ensemble Model (v4.0)** that aggregates the probability outputs of all three base models.
+* **Result:** Stabilized variance and maximized **Recall (96.5%)**, ensuring the system minimizes false negatives (missed diagnoses).
 
 ---
 
-## 5️⃣ Front-End & Human-Centered Design
+## 4️⃣ Phase 2: MLOps & Governance-as-Code
 
-Built with **Streamlit** using **Human-Centered Design** and the **Fogg Behavior Model (B=MAT)**.
 
-**Key Principles:**
-- **Motivation:** Clinical impact, trust, transparency (SHAP visualizations).
-- **Ability:** Low friction (≤2 clicks), accessibility (WCAG-compliant).
-- **Trigger:** Integration into patient intake and screenings.
+
+This phase transformed the project from a "research notebook" into a "production system." We implemented an immutable audit trail using **MLflow** to satisfy **PIPEDA & FDA SaMD** reproducibility guidelines.
+
+**Core Governance Features:**
+
+* **Reproducibility:** Enforced `conda.yaml` environment locking. This prevents "dependency drift," ensuring the model runs exactly the same way in Production as it did in Development.
+* **Auditability:** Every single training run logged:
+    * **Git Commit Hash:** Links the model binary to the exact code version.
+    * **Dataset Digest:** Proves exactly which patient data was used.
+    * **Parameters:** Hyperparameters for Random Forest/XGBoost.
+* **Gated Promotion:** Implemented a strict **Staging $\rightarrow$ Production** workflow. Models cannot be deployed without passing specific validation thresholds (Recall > 95%) and receiving manual approval in the Model Registry.
+
+| Component | Tool Used | Purpose |
+| :--- | :--- | :--- |
+| **Tracking Server** | MLflow | Centralized log of metrics and artifacts. |
+| **Model Registry** | MLflow | Version control for AI models (v1.0 $\rightarrow$ v4.0). |
+| **Environment** | Conda | Dependency isolation. |
+
+---
+
+## 5️⃣ Phase 5: Front-End & Deployment
+
+**Architecture:** The system is deployed on **Streamlit Cloud**, serving the MLflow-registered model via a backend API.
+
+**Human-Centered Design (B=MAT):**
+* **Motivation:** We build trust by visualizing *why* the AI made a decision using **SHAP** plots (e.g., "High Glucose increased risk by 15%").
+* **Ability:** The "Patient Data Entry" form is optimized for clinical workflows (under 30 seconds to complete).
 
 **Main UI Pages:**
-- **Landing Page** – Quick access CTAs.
-- **Patient Data Entry** – Guided form.
-- **Risk Assessment** – Probability, category, contributing factors.
-- **Records Management** – CRUD operations.
-- **Practitioner & Patient Profiles** – Overview of key data.
-- **Model Performance** – Metrics & fairness indicators.
-- **System Settings** – Thresholds, preferences.
-- **Data Privacy & Consent** – Notification & consent controls.
-- **Help & Support**, **Contact Us**, **About Us**.
+* **Patient Data Entry:** Guided input form.
+* **Risk Assessment:** Real-time probability scoring.
+* **Practitioner Profile:** Overview of patient population statistics.
+* **System Settings:** Sensitivity thresholds configuration.
 
 ---
 
-## 6️⃣ Deployment
+## 6️⃣ Potential Harms & Mitigation
 
-**Version Control:** Git + GitHub.  
-**Hosting:** Streamlit Cloud.  
-**Database:** SQLite (future: scalable DB).  
-**Security:** Encryption (GDPR, PHIPA, HIPAA compliance), role-based access.
-
-**Backend Models:** Ensemble model with option to view individual model predictions.
-
-**Monitoring & Feedback:**
-- **Performance Drift:** EvidentlyAI.
-- **Fairness Audits:** Scheduled subgroup checks.
-- **Feedback Loop:** Clinician validation forms.
+| Harm | Mitigation Strategy |
+| :--- | :--- |
+| **Discriminatory Predictions** | **Subgroup Audits:** We monitor Recall rates across Gender and Age groups to detect bias. |
+| **Automation Bias** | **Human-in-the-Loop:** The UI explicitly states this is a "Decision Support Tool," not a diagnosis. |
+| **Model Drift** | **Retraining Protocol:** Weekly monitoring of data distribution (PSI/KS Test). |
 
 ---
 
-## 7️⃣ Potential Harms & Mitigation
+## 📂 Documentation
 
-| Harm                    | Real-World Case      | Mitigation                          |
-|-------------------------|----------------------|--------------------------------------|
-| Discriminatory Predictions | Optum Cost Algorithm | Subgroup audits, fairness-aware models |
-| Automation Bias         | AI Imaging Tools     | Human-in-the-loop                    |
-| Exclusion of Vulnerable Data | Sepsis Model Failures | Inclusive preprocessing              |
-| Transparency Deficit    | General AI Critiques | Consent banners, model cards         |
-
----
-
-## 8️⃣ Conclusion & Next Steps
-
-The StrokeRisk application delivers **real-time, explainable stroke risk predictions** using an ensemble ML backend and ethical design practices.
-
-**Next Steps:**
-- Integrate secure multi-clinic database.
-- Pilot with healthcare providers.
-- Expand predictive scope to cardiovascular conditions.
-
----
-
-## 📂 Additional Documentation
-
-- **Phase 1:** [Business Understanding](https://drive.google.com/file/d/1P7XoourdFPqp3Lw_USbUy06eCNZDEXAN/view?usp=drive_link)
-- **Phase 2:** [Data Understanding & Preparation](https://drive.google.com/file/d/1MtRAzNDO4Ty9QOEIlTLsTaXKlE60Vj0g/view?usp=drive_link)
-- **Phase 3 & 4:** [Model Creation & Evaluation](https://drive.google.com/file/d/1fckHXpVdK5yX1S1W8FHYW6YgbyuJoWw7/view?usp=drive_link)
-
----
+* **Phase 1:** [Business Understanding & Design](https://drive.google.com/file/d/1P7XoourdFPqp3Lw_USbUy06eCNZDEXAN/view?usp=drive_link)
+* **Phase 2:** [MLOps Development & Implementation Report](https://drive.google.com/file/d/1MtRAzNDO4Ty9QOEIlTLsTaXKlE60Vj0g/view?usp=drive_link)
+* **Phase 3:** [System Reflection & Finalization](https://drive.google.com/file/d/1fckHXpVdK5yX1S1W8FHYW6YgbyuJoWw7/view?usp=drive_link)
