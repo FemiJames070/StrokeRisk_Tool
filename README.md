@@ -1,7 +1,7 @@
 # StrokeRisk AI System
 
 **Project Phase:** 5 (Full Lifecycle: Development $\rightarrow$ MLOps $\rightarrow$ Deployment)  
-**Course:** Web Development and Cloud Computing – ARTI404  
+**Course:** AI Development, Web Development and Cloud Computing 
 **Lead Architect:** Oluwafemi (Femi) James
 
 **Contributing Teams:**
@@ -121,6 +121,15 @@ This phase transformed the project from a "research notebook" into a "production
 
 ## 📂 Documentation
 
-* **Phase 1:** [Business Understanding & Design](https://drive.google.com/file/d/1P7XoourdFPqp3Lw_USbUy06eCNZDEXAN/view?usp=drive_link)
-* **Phase 2:** [MLOps Development & Implementation Report](https://drive.google.com/file/d/1MtRAzNDO4Ty9QOEIlTLsTaXKlE60Vj0g/view?usp=drive_link)
-* **Phase 3:** [System Reflection & Finalization](https://drive.google.com/file/d/1fckHXpVdK5yX1S1W8FHYW6YgbyuJoWw7/view?usp=drive_link)
+### 🔬 Part 1: AI Development (G4 Pulse)
+*Focus: Data Science, Modeling, and Clinical Validation*
+- **Phase 1:** [Business Understanding & Objectives](https://drive.google.com/file/d/1P7XoourdFPqp3Lw_USbUy06eCNZDEXAN/view?usp=drive_link)
+- **Phase 2:** [Data Preparation & EDA Report](https://drive.google.com/file/d/1MtRAzNDO4Ty9QOEIlTLsTaXKlE60Vj0g/view?usp=drive_link)
+- **Phase 3 & 4:** [Model Creation, Training & Evaluation](https://drive.google.com/file/d/1fckHXpVdK5yX1S1W8FHYW6YgbyuJoWw7/view?usp=drive_link)
+
+### 🛡️ Part 2: MLOps & Governance (Group 2)
+*Focus: System Design, Lifecycle Management, and Compliance*
+- **Phase 1:** [Maintenance System Design & Planning](https://drive.google.com/file/d/1KFP1qpmSbCbi7MpDgqD3sk1ellMhR1Yt/view?usp=drive_link)
+- **Phase 2:** [MLOps Development & Implementation](https://drive.google.com/file/d/1uZFo58xYIr5LmNQUQlEvyQ1HrUC5ntoA/view?usp=drive_link)
+- **Phase 3:** [System Reflection & Finalization](https://drive.google.com/file/d/1pTO8-F4HyFeZzWXjbv_Vmfxj6Ea_PTMB/view?usp=drive_link)
+- **Full Suite:** [Complete Documentation Suite](https://drive.google.com/file/d/1-EIn7YQ-TX6cVogcKJyA1uZK-1oYI8JA/view?usp=drive_link)
